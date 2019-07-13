@@ -21,12 +21,12 @@ shards build
 The server only has one route currently, the root one, which accepts a file via binary post data. Currently the modified (or unmodified as it may be) file is returned as a Base64 encoded string. You can easily modify a file with a one line shell command
 
 ```bash
-base64 -d <<< "$(curl localhost:3000 -F 'image=@/path/to/image.jpg')" > /path/to/output.jpg 
+base64 -d <<< "$(curl localhost:6969 -F 'image=@/path/to/image.jpg')" > /path/to/output.jpg 
 ```
 
 where `/path/to/image.jpg ` is the path to the image you want to obfuscate and `/path/to/output.jpg` is the output file.
 
-You can access this api on my server at [https://fbmdob.watzon.tech](https://fbmdob.watzon.tech). Please be kind to my little vps instance!
+You can replace `localhost:6969` with `fbmdob.watzon.tech` to use my instance. Please be kind to my little vps!
 
 ## Development
 

@@ -1,0 +1,17 @@
+name: fbmdob
+version: 0.1.0
+
+authors:
+  - Chris <cawatson1993@gmail.com>
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+targets:
+  fbmdob:
+    main: src/fbmdob.cr
+
+crystal: 0.29.0
+
+license: MIT

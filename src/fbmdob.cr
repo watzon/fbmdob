@@ -17,44 +17,43 @@ module Fbmdob
     end
 
     def fuck_facebook
-      result = scan_metadata
-      if result
-        swap_hex(result.size)
-        return true
+      data = @data.to_a
+      new_data = [] of UInt8
+
+      until data.empty?
+        next_byte = data.shift
+
+        if next_byte == 70
+          new_data.push(next_byte)
+          next_bytes = data.shift(3)
+
+          if next_bytes == [66, 77, 68]
+            new_data.concat(next_bytes)
+
+            bom = data.shift(6)
+            new_data.concat(bom)
+
+            case bom
+            when [48, 49, 48, 48, 48, 97]
+              hex = data.shift(8 * 10)
+              new_data.concat(hex.shuffle)
+            when [50, 51, 48, 48, 48, 57]
+              hex = data.shift(8 * 9)
+              new_data.concat(hex.shuffle)
+            end
+          else
+            new_data.concat(next_bytes)
+          end
+        else
+          new_data.push(next_byte)
+        end
       end
-      false
+
+      @data = Slice.new(new_data.to_unsafe, new_data.size)
     end
 
     def to_b64
       Base64.encode(@data)
-    end
-
-    private def scan_metadata
-      io = IO::Memory.new(@data)
-
-      until io.empty?
-        if fbmd = io.gets("FBMD")
-          bom = io.gets(6).to_s
-          case bom
-          when "01000a"
-            result = bom + io.gets(8 * 11).to_s
-          when "230009"
-            result = bom + io.gets(8 * 10).to_s
-          else
-            return nil
-          end
-        end
-
-        break
-      end
-
-      result
-    end
-
-    private def swap_hex(length)
-      new_hex = random_hex(length / 2)
-      @data = String.new(@data).sub(/FBMD[a-f0-9]+/, "FBMD#{new_hex}").to_slice
-      new_hex
     end
 
     private def random_hex(length)

@@ -15,6 +15,14 @@
 @import "~@fortawesome/fontawesome-pro/scss/regular";
 @import "~@fortawesome/fontawesome-pro/scss/solid";
 
+p {
+    margin-bottom: $size-6;
+}
+
+section {
+    padding: $size-5 $size-6 !important;
+}
+
 .navbar-brand h2 {
     font-weight: bold;
 }
@@ -25,10 +33,6 @@
 
 .download-link {
     margin-top: $size-5;
-
-    p {
-        padding-top: $size-5;
-    }
 }
 
 .process-error {

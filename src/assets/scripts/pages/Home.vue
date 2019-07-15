@@ -8,10 +8,10 @@
                 <p>
                     This is a tool to obfuscate IPTC special instructions encoded into some Facebook images. Note, we're not removing 
                     the instruction, but simply shuffling the bits around so as to make it useless to facebook for tracking. This 
-                    works by scanning the images bits for a special instruction that starts with <strong>FBMD</strong> which I 
-                    assume either stands for Facebook Member Data or Facebook Metadata. Following those 4 bytes is a 6 byte 
-                    sequence that tells us the length of the tracking hash (either 72 or 80 bytes) and then a unique hash 
-                    which I assume is stored somewhere in Facebook's database matching the image to an uploader.
+                    works by scanning the images bits for a special instruction that starts with <strong>FBMD</strong> which stands
+                    for Facebook Message Digest. Following those 4 bytes is a 6 byte sequence that tells us the length of the
+                    tracking hash (either 72 or 80 bytes) and then a unique hash which I assume is stored somewhere in Facebook's
+                    database matching the image to an uploader.
                 </p>
                 <p>
                     This tool simply takes the tracking hash's bytes and shuffles them around, thereby making them useless to 

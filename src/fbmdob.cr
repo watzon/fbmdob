@@ -1,5 +1,6 @@
 require "kemal"
 require "base64"
+require "zip"
 
 module Fbmdob
   VERSION = "0.1.0"
@@ -62,23 +63,81 @@ module Fbmdob
   end
 end
 
-post "/" do |env|
-  img_data = env.params.files["image"]?
+INFO_TEXT = <<-TEXT
+Thank you for using the Facebook Metadata Obfuscation Tool! I hope you had a good experience. Please share this tool with your friends and, if you feel so inclined, donate on my Patreon :) I provide these tools for free, but servers unfortunately aren't.
 
-  if !img_data
+Patreon: https://www.patreon.com/watzon
+Github: https://github.com/watzon
+Twitter: https://twitter.com/_watzon
+Keybase: https://keybase.com/watzon
+TEXT
+
+get "/" do
+  render "src/views/index.ecr", "src/views/layouts/default.ecr"
+end
+
+post "/images" do |env|
+  begin
+    uploads = env.params.files
+  rescue ex
+    halt(env, 503, ex.message || "Something went wrong")
+  end
+
+  if !uploads || uploads.empty?
+    pp uploads
     halt(env, 422, "Invalid request")
   end
 
   begin
-    file = img_data.tempfile
-    b64 = Base64.encode(file.gets_to_end)
+    images = uploads.values.map do |upload|
+      name = upload.filename
+      image = upload.tempfile
 
-    file = Fbmdob::Image.from_b64(b64)
-    file.fuck_facebook
-    file.to_b64
+      b64 = Base64.encode(image.gets_to_end)
+
+      image = Fbmdob::Image.from_b64(b64)
+      image.fuck_facebook
+
+      { name: name, data: image.data }
+    end
+
+    tmp = File.tempname("fbmdob", ".zip")
+    zip = File.open(tmp, "w") do |file|
+      Zip::Writer.open(file) do |zip|
+
+        images.each do |image|
+          name = image[:name] || Random::Secure.hex(10) + ".jpg"
+          zip.add(name) do |io|
+            io << IO::Memory.new(image[:data])
+          end
+        end
+
+        zip.add("info.txt", INFO_TEXT)
+      end
+    end
+
+    File.basename(tmp, ".zip")
   rescue ex
     halt(env, 503, "Something went wrong")
   end
+end
+
+get "/download/:name" do |env|
+  if name = env.params.url["name"]?
+    begin
+      name = "#{name}.zip"
+      path = File.join(Dir.tempdir, name)
+      send_file env, path
+    rescue exception
+      halt(env, 404, "Not found")
+    end
+  else
+    halt(env, 404, "Not found")
+  end
+end
+
+get "/ping" do
+  "pong"
 end
 
 Kemal.run do |config|

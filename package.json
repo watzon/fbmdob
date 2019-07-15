@@ -1,0 +1,41 @@
+{
+  "name": "fbmdob",
+  "version": "1.0.0",
+  "description": "It [came to my attention recently](https://twitter.com/oasace/status/1149181539000864769) that Facebook is embedding tracking metadata in photos that you download from facebook.com using a IPTC special instruction that starts with `FBMD`. This is just one more way for Facebook to keep track of your activities on the internet, and a sneaky one at that.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "dev": "yarn run webpack --progress --hide-modules --color --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "yarn run webpack --watch --hide-modules --color --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "NODE_ENV=production yarn run webpack --progress --hide-modules --color --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watzon/fbmdob.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/watzon/fbmdob/issues"
+  },
+  "homepage": "https://github.com/watzon/fbmdob#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-pro": "^5.9.0",
+    "@vizuaalog/bulmajs": "^0.10.0",
+    "bulma": "^0.7.5",
+    "bulma-extensions": "^6.2.7",
+    "laravel-mix": "^4.1.2",
+    "resolve-url-loader": "3.1.0",
+    "sass": "^1.22.4",
+    "sass-loader": "7.*",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.7",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.35.3"
+  },
+  "dependencies": {
+    "vue2-dropzone": "^3.6.0"
+  }
+}

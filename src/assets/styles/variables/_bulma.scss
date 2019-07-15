@@ -1,0 +1,53 @@
+// Set your colors
+$white: #FAFAFA;
+$background: #faf0e8;
+
+$primary: #305f72;
+$primary-invert: findColorInvert($primary);
+
+$secondary: #DFB07D;
+$secondary-invert: findColorInvert($secondary);
+
+$tertiary: #f0b7a4;
+$tertiary-invert: findColorInvert(#f0b7a4);
+
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+$github: #F5F5F5;
+$github-invert: findColorInvert($github);
+$gitlab: #FC6D26;
+$gitlab-invert: findColorInvert($gitlab);
+
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($light, $light-invert),
+    "dark": ($dark, $dark-invert),
+    "background": ($white, $black),
+    "primary": ($primary, $primary-invert),
+    "secondary": ($secondary, $secondary-invert),
+    "tertiary": ($tertiary, $tertiary-invert),
+    "info": ($info, $info-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+    "twitter": ($twitter, $twitter-invert),
+    "github": ($github, $github-invert),
+    "gitlab": ($gitlab, $gitlab-invert)
+);
+
+$family-sans-serif: 'Raleway', sans-serif;
+
+// Border radius
+$radius-small: .25em;
+$radius: .5em;
+$radius-large: 1em;
+
+// Body
+$body-background-color: $white;
+
+// Card
+$card-background-color: $white-bis;
+
+// Links
+$link: $secondary;

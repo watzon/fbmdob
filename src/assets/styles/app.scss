@@ -1,0 +1,36 @@
+@import "~bulma/sass/utilities/_all";
+
+@import "./variables/imports";
+@import "./variables/bulma";
+
+// Import Bulma styles
+@import "~bulma";
+
+@import "~bulma-extensions/bulma-tooltip/src/sass/index";
+
+// Fontawesome
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "~@fortawesome/fontawesome-pro/scss/brands";
+@import "~@fortawesome/fontawesome-pro/scss/light";
+@import "~@fortawesome/fontawesome-pro/scss/regular";
+@import "~@fortawesome/fontawesome-pro/scss/solid";
+
+.navbar-brand h2 {
+    font-weight: bold;
+}
+
+.process-button {
+    margin-bottom: $size-5;
+}
+
+.download-link {
+    margin-top: $size-5;
+
+    p {
+        padding-top: $size-5;
+    }
+}
+
+.process-error {
+    margin-top: $size-5;
+}

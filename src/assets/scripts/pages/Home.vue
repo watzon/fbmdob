@@ -13,6 +13,7 @@
                     tracking hash (either 72 or 80 bytes) and then a unique hash which I assume is stored somewhere in Facebook's
                     database matching the image to an uploader.
                 </p>
+                
                 <p>
                     This tool simply takes the tracking hash's bytes and shuffles them around, thereby making them useless to 
                     Facebook for tracking purposes. There is also a slight possibility that the hash will be shuffled to match 

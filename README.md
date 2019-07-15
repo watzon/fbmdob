@@ -6,6 +6,7 @@ This is a small server that uses Crystal and Kemal to swap the hash in that spec
 
 ## Installation
 
+### Manual
 **Note:** You will need [crystal](https://crystal-lang.org) to build and run this. 
 
 If you want to run this on your own server you'll need to clone this repo and build the server.
@@ -14,6 +15,14 @@ If you want to run this on your own server you'll need to clone this repo and bu
 shards build
 ./bin/fbmdob
 # => Kemal is ready to lead at http://0.0.0.0:6969
+```
+
+### Docker
+Clone this repo and run the following:
+```bash
+cd fbmdob
+docker build -t fbmdob:latest ./
+docker run -i -p 6969:6969 fbmdob:latest
 ```
 
 ## Usage

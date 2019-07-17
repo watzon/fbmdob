@@ -5,6 +5,10 @@ require "zip"
 module Fbmdob
   VERSION = "0.1.0"
 
+  BMD = [66, 77, 68]
+  LONG = [48, 49, 48, 48, 48, 97]
+  SHORT = [50, 51, 48, 48, 48, 57]
+
   class Image
 
     getter :data
@@ -28,17 +32,17 @@ module Fbmdob
           new_data.push(next_byte)
           next_bytes = data.shift(3)
 
-          if next_bytes == [66, 77, 68]
+          if next_bytes == BMD
             new_data.concat(next_bytes)
 
             bom = data.shift(6)
             new_data.concat(bom)
 
             case bom
-            when [48, 49, 48, 48, 48, 97]
+            when LONG
               hex = data.shift(8 * 10)
               new_data.concat(hex.shuffle)
-            when [50, 51, 48, 48, 48, 57]
+            when SHORT
               hex = data.shift(8 * 9)
               new_data.concat(hex.shuffle)
             end
